@@ -24,6 +24,8 @@ public class Task {
     private int done;
 
     public Task() {
+        this.status = 1;
+        this.done = 0;
     }
 
     public Task(String shortName, String developer, int status, int done) {
@@ -65,7 +67,7 @@ public class Task {
         this.status = status;
     }
 
-    public int isDone() {
+    public int getDone() {
         return done;
     }
 
@@ -83,8 +85,8 @@ public class Task {
         if (id != task.id) return false;
         if (status != task.status) return false;
         if (done != task.done) return false;
-        if (shortName != null ? !shortName.equals(task.shortName) : task.shortName != null) return false;
-        if (developer != null ? !developer.equals(task.developer) : task.developer != null) return false;
+        if (!Objects.equals(shortName, task.shortName)) return false;
+        if (!Objects.equals(developer, task.developer)) return false;
 
         return true;
     }
@@ -92,5 +94,16 @@ public class Task {
     @Override
     public int hashCode() {
         return Objects.hash(id, shortName, developer, status, done);
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", shortName='" + shortName + '\'' +
+                ", developer='" + developer + '\'' +
+                ", status=" + status +
+                ", done=" + done +
+                '}';
     }
 }

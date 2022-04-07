@@ -1,5 +1,6 @@
 package com.vkarakay.taskmanager.dao;
 
+import com.vkarakay.taskmanager.entity.Status;
 import com.vkarakay.taskmanager.entity.Task;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -16,12 +17,24 @@ public class TaskDAOImpl implements TaskDAO{
     private SessionFactory sessionFactory;
 
     @Override
-    @Transactional
     public List<Task> getAllTasks() {
 
         Session session = sessionFactory.getCurrentSession();
         List<Task> taskList = session.createQuery("from Task", Task.class).getResultList();
 
         return taskList;
+    }
+
+    public void getTasksByStatus() {
+        Session currentSession = sessionFactory.getCurrentSession();
+        Status status = currentSession.get(Status.class, 1);
+        System.out.println(status.getTasks());
+    }
+
+    @Override
+    public void saveNewTask(Task task) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.save(task);
     }
 }
