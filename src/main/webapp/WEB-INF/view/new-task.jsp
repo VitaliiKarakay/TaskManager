@@ -9,7 +9,7 @@
 
 <h2>Add new task</h2>
 <br>
-<form:form action="saveEmployee" modelAttribute="task">
+<form:form action="saveTask" modelAttribute="task">
     Shortname <form:input path="shortName"/>
     <br><br>
     Developer <form:input path="developer"/>

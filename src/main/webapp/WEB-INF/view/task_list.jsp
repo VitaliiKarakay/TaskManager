@@ -20,16 +20,47 @@
     </tr>
     <c:forEach var="task" items="${allTasks}">
 
+        <c:url var = "doneButton" value="/makeDone">
+            <c:param name="taskID" value="${task.id}"/>
+        </c:url>
+
+        <c:url var = "updateButton" value="/updateTask">
+            <c:param name="taskID" value="${task.id}"/>
+        </c:url>
+
         <tr>
             <td>${task.id}</td>
             <td>${task.shortName}</td>
             <td>${task.developer}</td>
-            <td>${task.status}</td>
-            <td>${task.done}</td>
+            <td><c:choose>
+                <c:when test="${task.status == 1}">
+                    <p>New</p>
+                </c:when>
+                <c:when test="${task.status == 2}">
+                    <p>WIP</p>
+                </c:when>
+                <c:when test="${task.status == 3}">
+                    <p>Testing</p>
+                </c:when>
+                <c:when test="${task.status == 4}">
+                    <p>Done</p>
+                </c:when>
+            </c:choose>
+            </td>
+
+            <td><c:choose>
+                <c:when test="${task.done == 0}">
+                    <p>No</p>
+                </c:when>
+                <c:when test="${task.done == 1}">
+                    <p>Yes</p>
+                </c:when>
+            </c:choose>
+            </td>
             <td><input type="button" value="Done"
-                       onclick="window.location.href = 'makeDone'"/>
+                       onclick="window.location.href = '${doneButton}'"/>
                 <input type="button" value="Update"
-                       onclick="window.location.href = 'makeDone'"/></td>
+                       onclick="window.location.href = '${updateButton}'"/></td>
         </tr>
     </c:forEach>
 

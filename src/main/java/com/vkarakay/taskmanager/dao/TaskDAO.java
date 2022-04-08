@@ -8,7 +8,10 @@ public interface TaskDAO {
 
     public List<Task> getAllTasks ();
 
-    void saveNewTask(Task task);
+    void saveTask(Task task);
 
     public void getTasksByStatus();
+
+    Task getTask(int id);
+
 }

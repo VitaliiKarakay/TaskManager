@@ -1,15 +1,11 @@
 package com.vkarakay.taskmanager.controller;
 
-import com.vkarakay.taskmanager.dao.TaskDAO;
 import com.vkarakay.taskmanager.entity.Task;
 import com.vkarakay.taskmanager.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,16 +31,32 @@ public class MainController {
         Task task = new Task();
         model.addAttribute("task", task);
 
-        return "task-info";
+        return "new-task";
     }
 
-    @RequestMapping("/saveEmployee")
+    @RequestMapping("/saveTask")
     public String saveTask(@ModelAttribute ("task") Task task) {
 
-        taskService.saveNewTask(task);
+        taskService.saveTask(task);
 
         return "redirect:/";
+    }
 
+    @RequestMapping("/makeDone")
+    public String makeTaskDone(@RequestParam ("taskID") int id, Model model) {
+
+        Task task = taskService.getTask(id);
+        task.setDone(1);
+        task.setStatus(4);
+        model.addAttribute(task);
+        taskService.saveTask(task);
+
+        return "redirect:/";
+    }
+
+    @RequestMapping("/updateTask")
+    public String updateTask(@RequestParam("taskID") int id, Model model) {
+        return "";
     }
 
 }
