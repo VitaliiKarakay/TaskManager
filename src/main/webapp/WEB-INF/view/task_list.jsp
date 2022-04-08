@@ -12,7 +12,7 @@
 
     <tr>
         <th>Id</th>
-        <th>Shortname</th>
+        <th>Description</th>
         <th>Developer</th>
         <th>Status</th>
         <th>Done</th>

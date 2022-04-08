@@ -1,16 +1,22 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Vitalii
-  Date: 08.04.2022
-  Time: 19:07
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Updating task</title>
 </head>
 <body>
 
+<h2>Updating existing task</h2>
+<form:form action="saveTask" modelAttribute="task">
+    <form:hidden path="id"/>
+    Description <form:input path="shortName"/>
+    <br><br>
+    Developer <form:input path="developer"/>
+    <br><br>
+    Status <form:input path="status"/>
+    <br><br>
+    <input type="submit" value="OK">
+</form:form>
 </body>
 </html>

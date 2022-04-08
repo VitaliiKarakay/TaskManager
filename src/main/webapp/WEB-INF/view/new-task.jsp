@@ -10,7 +10,7 @@
 <h2>Add new task</h2>
 <br>
 <form:form action="saveTask" modelAttribute="task">
-    Shortname <form:input path="shortName"/>
+    Description <form:input path="shortName"/>
     <br><br>
     Developer <form:input path="developer"/>
     <br><br>

@@ -36,7 +36,9 @@ public class MainController {
 
     @RequestMapping("/saveTask")
     public String saveTask(@ModelAttribute ("task") Task task) {
-
+        if (task.getStatus() == 4) {
+            task.setDone(1);
+        }
         taskService.saveTask(task);
 
         return "redirect:/";
@@ -56,7 +58,10 @@ public class MainController {
 
     @RequestMapping("/updateTask")
     public String updateTask(@RequestParam("taskID") int id, Model model) {
-        return "";
+
+        Task task = taskService.getTask(id);
+        model.addAttribute("task", task);
+        return "update-task";
     }
 
 }
