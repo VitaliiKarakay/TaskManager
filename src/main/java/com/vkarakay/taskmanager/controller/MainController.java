@@ -35,7 +35,7 @@ public class MainController {
     }
 
     @RequestMapping("/saveTask")
-    public String saveTask(@ModelAttribute ("task") Task task) {
+    public String saveTask(@ModelAttribute("task") Task task) {
         if (task.getStatus() == 4) {
             task.setDone(1);
         }
@@ -45,7 +45,7 @@ public class MainController {
     }
 
     @RequestMapping("/makeDone")
-    public String makeTaskDone(@RequestParam ("taskID") int id, Model model) {
+    public String makeTaskDone(@RequestParam("taskID") int id, Model model) {
 
         Task task = taskService.getTask(id);
         task.setDone(1);
