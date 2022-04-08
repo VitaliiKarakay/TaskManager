@@ -1,6 +1,9 @@
 package com.vkarakay.taskmanager.entity;
 
+import org.hibernate.Session;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "statuses", schema = "task_manager")
@@ -12,6 +15,10 @@ public class Status {
     @Basic
     @Column(name = "name")
     private String name;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "status")
+    private List<Task> tasks;
 
     public Status() {
     }
@@ -35,6 +42,15 @@ public class Status {
     public void setName(String name) {
         this.name = name;
     }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
 
     @Override
     public boolean equals(Object o) {
