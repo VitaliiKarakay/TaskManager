@@ -27,6 +27,8 @@
             <td>${task.status}</td>
             <td>${task.done}</td>
             <td><input type="button" value="Done"
+                       onclick="window.location.href = 'makeDone'"/>
+                <input type="button" value="Update"
                        onclick="window.location.href = 'makeDone'"/></td>
         </tr>
     </c:forEach>
