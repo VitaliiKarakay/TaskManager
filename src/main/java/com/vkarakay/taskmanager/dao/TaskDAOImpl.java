@@ -40,16 +40,21 @@ public class TaskDAOImpl implements TaskDAO{
     @Override
     public Task getTask(int id) {
         Session session = sessionFactory.getCurrentSession();
+        Task task = session.get(Task.class, id);
+        task.setStatusList(fillStatusMap());
+        return task;
+    }
+
+    public Map<Integer, String> fillStatusMap() {
+        Session session = sessionFactory.getCurrentSession();
         Map<Integer, String> statusMap = new HashMap<>();
         String hql = "FROM Status";
         Query query = session.createQuery(hql);
         List<Status> statusList = query.getResultList();
-        Task task = session.get(Task.class, id);
         for (Status status: statusList) {
             statusMap.put(status.getId(), status.getName());
         }
-        task.setStatusList(statusMap);
-        return task;
+        return statusMap;
     }
 
     @Override
