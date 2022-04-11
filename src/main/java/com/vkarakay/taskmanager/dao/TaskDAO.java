@@ -10,7 +10,7 @@ public interface TaskDAO {
 
     void saveTask(Task task);
 
-    public void getTasksByStatus();
+    public List<Task> getTasksByDoneStatus(int id);
 
     Task getTask(int id);
 

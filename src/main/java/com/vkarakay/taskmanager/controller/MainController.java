@@ -5,8 +5,10 @@ import com.vkarakay.taskmanager.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -19,7 +21,16 @@ public class MainController {
     public String getAllTasks(Model model) {
 
         List<Task> allTasks = taskService.getAllTasks();
-        taskService.getTasksByStatus();
+        model.addAttribute("allTasks", allTasks);
+
+        return "task_list";
+    }
+
+    @GetMapping("/getTasksByDoneStatus")
+    public String getTasksByDoneStatus(@RequestParam ("doneId")int doneId, Model model) {
+
+        List<Task> allTasks = taskService.getTasksByDoneStatus(doneId);
+        System.out.println(allTasks);
         model.addAttribute("allTasks", allTasks);
 
         return "task_list";
@@ -35,7 +46,10 @@ public class MainController {
     }
 
     @RequestMapping("/saveTask")
-    public String saveTask(@ModelAttribute("task") Task task) {
+    public String saveTask(@Valid @ModelAttribute("task") Task task, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "update-task";
+        }
         if (task.getStatus() == 4) {
             task.setDone(1);
         }

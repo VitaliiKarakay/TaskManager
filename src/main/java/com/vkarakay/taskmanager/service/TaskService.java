@@ -12,6 +12,7 @@ public interface TaskService {
 
     public void saveTask(Task task);
 
-    public void getTasksByStatus();
+    public List<Task> getTasksByDoneStatus(int id);
+
 
 }

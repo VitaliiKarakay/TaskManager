@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page isELIgnored="false"%>
+<%@ page isELIgnored="false" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -10,6 +10,7 @@
 <br><br>
 <table border="1" class="data">
 
+
     <tr>
         <th>Id</th>
         <th>Description</th>
@@ -17,15 +18,25 @@
         <th>Status</th>
         <th>Done</th>
         <th>Operations</th>
+
+
     </tr>
     <c:forEach var="task" items="${allTasks}">
 
-        <c:url var = "doneButton" value="/makeDone">
+        <c:url var="doneButton" value="/makeDone">
             <c:param name="taskID" value="${task.id}"/>
         </c:url>
 
-        <c:url var = "updateButton" value="/updateTask">
+        <c:url var="updateButton" value="/updateTask">
             <c:param name="taskID" value="${task.id}"/>
+        </c:url>
+
+        <c:url var="getDoneButton" value="/getTasksByDoneStatus">
+            <c:param name="doneId" value="1"/>
+        </c:url>
+
+        <c:url var="getNotDoneButton" value="/getTasksByDoneStatus">
+            <c:param name="doneId" value="0"/>
         </c:url>
 
         <tr>
@@ -67,6 +78,13 @@
 </table>
 <br>
 <input type="button" value="Add"
-onclick="window.location.href = 'addNewTask'"/>
+       onclick="window.location.href = 'addNewTask'"/><br>
+<input type="button" value="All done"
+       onclick="window.location.href = '${getDoneButton}'"/>
+<input type="button" value="All not done"
+       onclick="window.location.href = '${getNotDoneButton}'"/>
+<input type="button" value="All tasks"
+       onclick="window.location.href = ''"/>
+
 </body>
 </html>

@@ -1,6 +1,5 @@
 package com.vkarakay.taskmanager.entity;
 
-import org.hibernate.Session;
 
 import javax.persistence.*;
 import java.util.List;

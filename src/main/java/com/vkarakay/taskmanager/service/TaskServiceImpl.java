@@ -37,7 +37,9 @@ public class TaskServiceImpl implements TaskService{
 
     @Override
     @Transactional
-    public void getTasksByStatus() {
-        taskDAO.getTasksByStatus();
+    public List<Task> getTasksByDoneStatus(int id) {
+       return taskDAO.getTasksByDoneStatus(id);
     }
+
+
 }

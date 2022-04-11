@@ -1,12 +1,12 @@
 package com.vkarakay.taskmanager.dao;
 
-import com.vkarakay.taskmanager.entity.Status;
 import com.vkarakay.taskmanager.entity.Task;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.Query;
 import java.util.List;
 
 @Repository
@@ -24,10 +24,14 @@ public class TaskDAOImpl implements TaskDAO{
         return taskList;
     }
 
-    public void getTasksByStatus() {
-        Session currentSession = sessionFactory.getCurrentSession();
-        Status status = currentSession.get(Status.class, 1);
-        System.out.println(status.getTasks());
+    public List<Task> getTasksByDoneStatus(int id) {
+        Session session = sessionFactory.getCurrentSession();
+
+        String hql = "FROM Task where done = :id";
+        Query query = session.createQuery(hql);
+        query.setParameter("id", id);
+        List<Task> allTasks = query.getResultList();
+        return allTasks;
     }
 
     @Override
