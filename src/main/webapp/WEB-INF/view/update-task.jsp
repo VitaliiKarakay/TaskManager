@@ -14,8 +14,8 @@
     <br><br>
     Developer <form:input path="developer"/>
     <br><br>
-    Status <form:input path="status"/>
-    <font color="red"><form:errors path="status"/></font>
+    Status <form:radiobuttons path="status" items="${task.statusList}"/>
+<%--    <font color="red"><form:errors path="status"/></font>--%>
     <br><br>
     <input type="submit" value="OK">
 </form:form>

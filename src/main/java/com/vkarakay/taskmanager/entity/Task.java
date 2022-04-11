@@ -3,6 +3,8 @@ package com.vkarakay.taskmanager.entity;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import javax.validation.constraints.NotBlank;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 @Entity
@@ -27,10 +29,17 @@ public class Task {
     @Basic
     @Column(name = "done")
     private int done;
+    @Transient
+    private Map<Integer, String> statusList;
 
     public Task() {
         this.status = 1;
         this.done = 0;
+        statusList = new HashMap<>();
+        statusList.put(1, "New");
+        statusList.put(2, "WIP");
+        statusList.put(3, "Testing");
+        statusList.put(4, "Done");
     }
 
     public Task(String shortName, String developer, int status, int done) {
@@ -38,6 +47,14 @@ public class Task {
         this.developer = developer;
         this.status = status;
         this.done = done;
+    }
+
+    public Map<Integer, String> getStatusList() {
+        return statusList;
+    }
+
+    public void setStatusList(Map<Integer, String> statusList) {
+        this.statusList = statusList;
     }
 
     public int getId() {
