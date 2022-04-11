@@ -1,5 +1,6 @@
 package com.vkarakay.taskmanager.dao;
 
+import com.vkarakay.taskmanager.entity.Status;
 import com.vkarakay.taskmanager.entity.Task;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -7,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.Query;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class TaskDAOImpl implements TaskDAO{
@@ -37,7 +40,15 @@ public class TaskDAOImpl implements TaskDAO{
     @Override
     public Task getTask(int id) {
         Session session = sessionFactory.getCurrentSession();
+        Map<Integer, String> statusMap = new HashMap<>();
+        String hql = "FROM Status";
+        Query query = session.createQuery(hql);
+        List<Status> statusList = query.getResultList();
         Task task = session.get(Task.class, id);
+        for (Status status: statusList) {
+            statusMap.put(status.getId(), status.getName());
+        }
+        task.setStatusList(statusMap);
         return task;
     }
 
