@@ -23,8 +23,6 @@ public class Task {
     private String developer;
     @Basic
     @Column(name = "status")
-    @Min(value = 1, message = "Should be between 1 to 4")
-    @Max(value = 4, message = "Should be between 1 to 4")
     private int status;
     @Basic
     @Column(name = "done")

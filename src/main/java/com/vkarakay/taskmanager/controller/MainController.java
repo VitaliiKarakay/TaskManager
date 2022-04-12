@@ -46,10 +46,7 @@ public class MainController {
     }
 
     @RequestMapping("/saveTask")
-    public String saveTask(@Valid @ModelAttribute("task") Task task, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "update-task";
-        }
+    public String saveTask(@Valid @ModelAttribute("task") Task task) {
         if (task.getStatus() == 4) {
             task.setDone(1);
         }
