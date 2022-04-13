@@ -35,12 +35,14 @@ public class Task {
     private Employee employeeByDeveloperId;
 
     public Task() {
+        this.setDone(0);
+        statusList = new HashMap<>();
     }
 
-    //    public Task() {
+//        public Task() {
 //        this.status.setId(1);
 //        this.done = 0;
-//        statusList = new HashMap<>();
+////        statusList = new HashMap<>();
 //    }
 
     public Task(String shortName, Status status, Employee employeeByDeveloperId) {

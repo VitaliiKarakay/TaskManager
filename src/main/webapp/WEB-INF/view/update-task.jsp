@@ -15,7 +15,7 @@
     <br><br>
     Developer <form:input path="employeeByDeveloperId.id"/>
     <br><br>
-    Status <form:radiobuttons path="status" items="${task.statusList}"/>
+    Status <form:radiobuttons path="status.id" items="${task.statusList}"/>
 <%--    <font color="red"><form:errors path="status"/></font>--%>
     <br><br>
     <input type="submit" value="OK">

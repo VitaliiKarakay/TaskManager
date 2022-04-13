@@ -23,6 +23,7 @@ public class Status {
 //    private List<Task> tasksById;
 
     public Status() {
+        this.id = 0;
     }
 
     public Status(String name) {
@@ -65,9 +66,7 @@ public class Status {
         Status status = (Status) o;
 
         if (id != status.id) return false;
-        if (name != null ? !name.equals(status.name) : status.name != null) return false;
-
-        return true;
+        return name != null ? name.equals(status.name) : status.name == null;
     }
 
     @Override
