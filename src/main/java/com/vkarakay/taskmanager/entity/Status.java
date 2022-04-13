@@ -1,8 +1,9 @@
 package com.vkarakay.taskmanager.entity;
 
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -15,18 +16,21 @@ public class Status {
     @Basic
     @Column(name = "name")
     private String name;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "status")
-    private List<Task> tasks;
     @OneToMany(mappedBy = "status")
-    private List<Task> tasksById;
+//    @JoinColumn(name = "status")
+    private List<Task> tasks;
+//    @OneToMany(mappedBy = "status")
+//    private List<Task> tasksById;
 
     public Status() {
     }
 
     public Status(String name) {
         this.name = name;
+    }
+
+    public void addTask(Task task) {
+        tasks.add(task);
     }
 
     public int getId() {
@@ -73,11 +77,5 @@ public class Status {
         return result;
     }
 
-    public Collection<Task> getTasksById() {
-        return tasksById;
-    }
 
-    public void setTasksById(List<Task> tasksById) {
-        this.tasksById = tasksById;
-    }
 }

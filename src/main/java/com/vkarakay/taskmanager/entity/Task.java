@@ -1,5 +1,7 @@
 package com.vkarakay.taskmanager.entity;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.HashMap;
@@ -26,7 +28,7 @@ public class Task {
 //    @Column(name = "developerId")
 //    private int developerId;
     @ManyToOne
-    @JoinColumn(name = "status", referencedColumnName = "id")
+    @JoinColumn(name = "status")
     private Status status;
     @ManyToOne
     @JoinColumn(name = "developerId", referencedColumnName = "id")

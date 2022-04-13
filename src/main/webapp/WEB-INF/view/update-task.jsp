@@ -13,7 +13,7 @@
     <form:hidden path="id"/>
     Description <form:input path="shortName"/>
     <br><br>
-    Developer <form:input path="developer"/>
+    Developer <form:input path="employeeByDeveloperId.id"/>
     <br><br>
     Status <form:radiobuttons path="status" items="${task.statusList}"/>
 <%--    <font color="red"><form:errors path="status"/></font>--%>

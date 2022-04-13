@@ -20,7 +20,7 @@ public class Employee {
     @Basic
     @Column(name = "username")
     private String username;
-    @OneToMany(mappedBy = "employeeByDeveloperId")
+    @OneToMany(mappedBy = "employeeByDeveloperId", cascade = CascadeType.ALL)
     private List<Task> tasksById;
 
     public Employee() {
