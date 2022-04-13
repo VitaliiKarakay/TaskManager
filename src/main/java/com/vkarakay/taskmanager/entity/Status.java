@@ -2,6 +2,7 @@ package com.vkarakay.taskmanager.entity;
 
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -18,6 +19,8 @@ public class Status {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "status")
     private List<Task> tasks;
+    @OneToMany(mappedBy = "status")
+    private List<Task> tasksById;
 
     public Status() {
     }
@@ -50,7 +53,6 @@ public class Status {
         this.tasks = tasks;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -69,5 +71,13 @@ public class Status {
         int result = id;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
+    }
+
+    public Collection<Task> getTasksById() {
+        return tasksById;
+    }
+
+    public void setTasksById(List<Task> tasksById) {
+        this.tasksById = tasksById;
     }
 }

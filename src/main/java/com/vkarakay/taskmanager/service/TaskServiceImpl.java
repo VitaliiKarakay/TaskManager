@@ -1,5 +1,6 @@
 package com.vkarakay.taskmanager.service;
 
+import com.vkarakay.taskmanager.dao.EmployeeDAO;
 import com.vkarakay.taskmanager.dao.TaskDAO;
 import com.vkarakay.taskmanager.entity.Task;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ public class TaskServiceImpl implements TaskService{
 
     @Autowired
     private TaskDAO taskDAO;
+    @Autowired
+    private EmployeeDAO employeeDAO;
 
     @Override
     @Transactional

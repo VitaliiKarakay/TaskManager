@@ -1,11 +1,12 @@
 package com.vkarakay.taskmanager.controller;
 
+import com.vkarakay.taskmanager.entity.Employee;
 import com.vkarakay.taskmanager.entity.Task;
+import com.vkarakay.taskmanager.service.EmployeeService;
 import com.vkarakay.taskmanager.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -16,6 +17,8 @@ public class MainController {
 
     @Autowired
     private TaskService taskService;
+    @Autowired
+    private EmployeeService employeeService;
 
     @GetMapping("/")
     public String getAllTasks(Model model) {
@@ -45,9 +48,13 @@ public class MainController {
         return "new-task";
     }
 
+    public void someM(Employee employee) {
+        employeeService.saveEmployee(employee);
+    }
+
     @RequestMapping("/saveTask")
-    public String saveTask(@Valid @ModelAttribute("task") Task task) {
-        if (task.getStatus() == 4) {
+    public String saveTask(@ModelAttribute("task") Task task) {
+        if (task.getStatus().getId() == 4) {
             task.setDone(1);
         }
         taskService.saveTask(task);
@@ -60,7 +67,7 @@ public class MainController {
 
         Task task = taskService.getTask(id);
         task.setDone(1);
-        task.setStatus(4);
+        task.getStatus().setId(4);
         model.addAttribute(task);
         taskService.saveTask(task);
 

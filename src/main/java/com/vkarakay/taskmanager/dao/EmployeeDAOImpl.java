@@ -11,6 +11,7 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 
     @Autowired
     private SessionFactory sessionFactory;
+
     @Override
     public void saveEmployee(Employee employee) {
         Session session = sessionFactory.getCurrentSession();

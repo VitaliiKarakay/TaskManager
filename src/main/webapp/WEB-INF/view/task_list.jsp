@@ -42,21 +42,8 @@
         <tr>
             <td>${task.id}</td>
             <td>${task.shortName}</td>
-            <td>${task.developer}</td>
-            <td><c:choose>
-                <c:when test="${task.status == 1}">
-                    <p>New</p>
-                </c:when>
-                <c:when test="${task.status == 2}">
-                    <p>WIP</p>
-                </c:when>
-                <c:when test="${task.status == 3}">
-                    <p>Testing</p>
-                </c:when>
-                <c:when test="${task.status == 4}">
-                    <p>Done</p>
-                </c:when>
-            </c:choose>
+            <td>${task.employeeByDeveloperId.username}</td>
+            <td>${task.status.name}
             </td>
 
             <td><c:choose>

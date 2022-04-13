@@ -1,8 +1,11 @@
 package com.vkarakay.taskmanager.entity;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
+@Table(name = "employee", schema = "task_manager")
 public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -17,6 +20,17 @@ public class Employee {
     @Basic
     @Column(name = "username")
     private String username;
+    @OneToMany(mappedBy = "employeeByDeveloperId")
+    private List<Task> tasksById;
+
+    public Employee() {
+    }
+
+    public Employee(String name, String surname, String username) {
+        this.name = name;
+        this.surname = surname;
+        this.username = username;
+    }
 
     public int getId() {
         return id;
@@ -72,5 +86,13 @@ public class Employee {
         result = 31 * result + (surname != null ? surname.hashCode() : 0);
         result = 31 * result + (username != null ? username.hashCode() : 0);
         return result;
+    }
+
+    public Collection<Task> getTasksById() {
+        return tasksById;
+    }
+
+    public void setTasksById(List<Task> tasksById) {
+        this.tasksById = tasksById;
     }
 }

@@ -1,7 +1,6 @@
 package com.vkarakay.taskmanager.entity;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
 import javax.validation.constraints.NotBlank;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,28 +18,33 @@ public class Task {
     @NotBlank(message = "Should be filled")
     private String shortName;
     @Basic
-    @Column(name = "developer")
-    private String developer;
-    @Basic
-    @Column(name = "status")
-    private int status;
-    @Basic
     @Column(name = "done")
     private int done;
     @Transient
     private Map<Integer, String> statusList;
+//    @Basic
+//    @Column(name = "developerId")
+//    private int developerId;
+    @ManyToOne
+    @JoinColumn(name = "status", referencedColumnName = "id")
+    private Status status;
+    @ManyToOne
+    @JoinColumn(name = "developerId", referencedColumnName = "id")
+    private Employee employeeByDeveloperId;
 
     public Task() {
-        this.status = 1;
-        this.done = 0;
-        statusList = new HashMap<>();
     }
 
-    public Task(String shortName, String developer, int status, int done) {
+    //    public Task() {
+//        this.status.setId(1);
+//        this.done = 0;
+//        statusList = new HashMap<>();
+//    }
+
+    public Task(String shortName, Status status, Employee employeeByDeveloperId) {
         this.shortName = shortName;
-        this.developer = developer;
         this.status = status;
-        this.done = done;
+        this.employeeByDeveloperId = employeeByDeveloperId;
     }
 
     public Map<Integer, String> getStatusList() {
@@ -67,22 +71,6 @@ public class Task {
         this.shortName = shortname;
     }
 
-    public String getDeveloper() {
-        return developer;
-    }
-
-    public void setDeveloper(String developer) {
-        this.developer = developer;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
     public int getDone() {
         return done;
     }
@@ -91,35 +79,53 @@ public class Task {
         this.done = done;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+//    public int getDeveloperId() {
+//        return developerId;
+//    }
+//
+//    public void setDeveloperId(int developerId) {
+//        this.developerId = developerId;
+//    }
 
-        Task task = (Task) o;
-
-        if (id != task.id) return false;
-        if (status != task.status) return false;
-        if (done != task.done) return false;
-        if (!Objects.equals(shortName, task.shortName)) return false;
-        if (!Objects.equals(developer, task.developer)) return false;
-
-        return true;
+    public Status getStatus() {
+        return status;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, shortName, developer, status, done);
+    public void setStatus(Status status) {
+        this.status = status;
     }
+
+    public Employee getEmployeeByDeveloperId() {
+        return employeeByDeveloperId;
+    }
+
+    public void setEmployeeByDeveloperId(Employee employeeByDeveloperId) {
+        this.employeeByDeveloperId = employeeByDeveloperId;
+    }
+
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        Task task = (Task) o;
+//        return id == task.id && done == task.done && developerId == task.developerId && Objects.equals(shortName, task.shortName) && Objects.equals(statusList, task.statusList) && Objects.equals(status, task.status) && Objects.equals(employeeByDeveloperId, task.employeeByDeveloperId);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(id, shortName, done, statusList, developerId, status, employeeByDeveloperId);
+//    }
 
     @Override
     public String toString() {
         return "Task{" +
                 "id=" + id +
                 ", shortName='" + shortName + '\'' +
-                ", developer='" + developer + '\'' +
-                ", status=" + status +
                 ", done=" + done +
+                ", statusList=" + statusList +
+//                ", developerId=" + developerId +
+                ", statusesByStatus=" + status +
+                ", employeeByDeveloperId=" + employeeByDeveloperId +
                 '}';
     }
 }
